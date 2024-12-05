@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_form/screens/appbar.dart';
 import 'package:login_form/screens/input_output.dart';
 import 'package:login_form/screens/registraion_page.dart';
 
@@ -14,29 +15,19 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        title: const Text(
-          "Love Calculator",
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/bgi.jpg"), // সঠিক ইমেজ রেফারেন্স
-              fit: BoxFit.cover, // ইমেজকে পুরো ব্যাকগ্রাউন্ডে ফিট করবে
+              image: AssetImage("assets/images/bgi.jpg"),
+              fit: BoxFit.cover,
             ),
           ),
           child: Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20.0), // লেআউটের চারপাশে প্যাডিং
+                padding: const EdgeInsets.all(20.0),
                 child: Form(
                   key: _formkey,
                   child: Column(
@@ -158,6 +149,9 @@ class LoginPage extends StatelessWidget {
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email can not empty';
+    }
+    if (!emainController.text.contains('@')) {
+      return 'Email must contain @';
     }
     return null;
   }

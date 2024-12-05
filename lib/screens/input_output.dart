@@ -1,49 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:login_form/screens/calculate.dart';
+import 'package:login_form/screens/appbar.dart';
 
-class InputOutput extends StatelessWidget {
+class InputOutput extends StatefulWidget {
+  const InputOutput({super.key});
+
+  @override
+  State<InputOutput> createState() => _InputOutputState();
+}
+
+class _InputOutputState extends State<InputOutput> {
   final selfNameController = TextEditingController();
   final partnerNameController = TextEditingController();
 
-  InputOutput({super.key});
+  String? loveResult;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        title: const Text(
-          "Love Calculator",
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/bgi.jpg"),
-            fit: BoxFit.cover, // ইমেজ পুরো স্ক্রিনে ফিট হবে
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0), // চারপাশে প্যাডিং
+            padding: const EdgeInsets.all(20.0),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 45,),
+                  const SizedBox(height: 45),
                   Card(
                     elevation: 23,
-                    child: Text(
-                      "<3>",
+                    child: const Text(
+                      "Let's See",
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -83,24 +82,22 @@ class InputOutput extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Calculation Result"),
-                          content: Text(
-                            "Your name: ${selfNameController.text}\nPartner's name: ${partnerNameController.text}",
+                    onPressed: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Calculate(
+                            selfName: selfNameController.text,
+                            partnerName: partnerNameController.text,
                           ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Close'),
-                            ),
-                          ],
                         ),
                       );
+
+                      if (result != null) {
+                        setState(() {
+                          loveResult = result as String;
+                        });
+                      }
                     },
                     child: const Text("Calculate"),
                   ),

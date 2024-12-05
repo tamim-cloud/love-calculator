@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_form/screens/appbar.dart';
 
 class RegistrationPage extends StatelessWidget {
   final namController = TextEditingController();
@@ -13,17 +14,7 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        title: const Text(
-          "Love Calculator",
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Stack(
         children: [
           Container(
@@ -35,67 +26,69 @@ class RegistrationPage extends StatelessWidget {
             ),
           ),
        Padding( padding: EdgeInsets.all(21),
-         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                elevation: 35,
-                //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(78)),
-                child: const Text(
-                  "Registration Form",
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
+         child: SingleChildScrollView(
+           child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  elevation: 35,
+                  //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(78)),
+                  child: const Text(
+                    "Registration Form",
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 45,
-              ),
-              visibleMethod(
-                controller: namController,
-                hintText: 'Fullname',
-                prefix: const Icon(Icons.person_outline),
-              ),
-              
-              const SizedBox(
-                height: 11,
-              ),
-              visibleMethod(
-                controller: namControllers,
-                hintText: 'Email',
-                prefix: const Icon(Icons.email_outlined),
-              ),
-              const SizedBox(
-                height: 11,
-              ),
-              nonVisibleMethod(
-                controllers: passController,
-                hintTexts: 'Enter Password',
-                prefixs: const Icon(Icons.key),
-                suffixs: const Icon(Icons.visibility),
-              ),
-              const SizedBox(
-                height: 11,
-              ),
-              nonVisibleMethod(
-                controllers: passControllers,
-                hintTexts: 'Confirm Password',
-                prefixs: const Icon(Icons.key),
-                suffixs: const Icon(Icons.visibility),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_validateInputs(context)) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text("Registration"),
-              ),
-            ],
-          ),
+                const SizedBox(
+                  height: 45,
+                ),
+                visibleMethod(
+                  controller: namController,
+                  hintText: 'Fullname',
+                  prefix: const Icon(Icons.person_outline),
+                ),
+                
+                const SizedBox(
+                  height: 11,
+                ),
+                visibleMethod(
+                  controller: namControllers,
+                  hintText: 'Email',
+                  prefix: const Icon(Icons.email_outlined),
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                nonVisibleMethod(
+                  controllers: passController,
+                  hintTexts: 'Enter Password',
+                  prefixs: const Icon(Icons.key),
+                  suffixs: const Icon(Icons.visibility),
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                nonVisibleMethod(
+                  controllers: passControllers,
+                  hintTexts: 'Confirm Password',
+                  prefixs: const Icon(Icons.key),
+                  suffixs: const Icon(Icons.visibility),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_validateInputs(context)) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text("Registration"),
+                ),
+              ],
+            ),
+           ),
          ),
        )
         ]
